@@ -1,5 +1,5 @@
 # CATEs
-Implementation of all estimators that are applied in the Empirical Monte Carlo Study of Knaus, Lechner and Strittmatter (2018). They are based on the packages [grf](https://github.com/grf-labs/grf) and [glmnet](https://github.com/cran/glmnet).
+Implementation of all estimators that are applied in the Empirical Monte Carlo Study of [Knaus](https://mcknaus.github.io/), [Lechner](https://www.michael-lechner.eu/) and [Strittmatter](http://www.anthonystrittmatter.com/home) (2018). They are based on the packages [grf](https://github.com/grf-labs/grf) and [glmnet](https://github.com/cran/glmnet).
 
 ## Example
 As we are not allowed to share the data used in the study, the following example uses the observational data generating process of the example of [grf](https://github.com/grf-labs/grf) to illustrate how it works. The function IATEs is a wrapper for the underlying functions and uses all the default settings of the packages. If you want to have more control over the settings, use the respective functions in CATEs_utils.
