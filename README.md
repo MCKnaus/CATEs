@@ -1,0 +1,39 @@
+# CATEs
+Implementation of all estimators used in the Empirical Monte Carlo Study of Knaus, Lechner and Strittmatter (2018). 
+The cross-validated Post-Lasso is based on the [grf](https://github.com/grf-labs/grf) and [glmnet](https://github.com/cran/glmnet) packages.
+
+## Example
+
+As we are not allowed to share the data underlying our study, the following example uses the observational data generating process of the example of [grf](https://github.com/grf-labs/grf) to illustrate how it works.
+
+```R
+# Download current version from Github
+library(devtools)
+install_github(repo="MCKnaus/CATEs")
+library(CATEs)
+
+# Generate estimation sample
+n = 4000; p = 20
+x_tr = matrix(rnorm(n * p), n, p)
+tau_tr = 1 / (1 + exp(-x_tr[, 3]))
+d_tr = rbinom(n ,1, 1 / (1 + exp(-x_tr[, 1] - x_tr[, 2])))
+y_tr = pmax(x_tr[, 2] + x_tr[, 3], 0) + rowMeans(x_tr[, 4:6]) / 2 + d_tr * tau_tr + rnorm(n)
+
+# Generate validation sample of same size
+x_val = matrix(rnorm(n * p), n, p)
+tau_val = 1 / (1 + exp(-x_val[, 3]))
+
+# Apply all estimators to the training sample and predict IATEs for validation sample
+iates_mat = IATEs(y_tr,d_tr,x_tr,tau_tr,x_val)
+
+# Calculate and print mean MSEs
+mMSE = colMeans((iates_mat - tau_val)^2)
+names(mMSE) = colnames(iates_mat)
+mMSE*1000
+```
+
+
+## References
+
+Knaus, Lechner, Strittmatter (2018). Machine Learning Estimation of Heterogeneous Causal
+Effects: Empirical Monte Carlo Evidence, [arXiv](https://arxiv.org/abs/1810.13237)
