@@ -21,6 +21,7 @@ mom_ipw_grf(y, d, x, np, xnew, args_tau = list())
 }
 \value{
 Returns vector containing the out-of-sample IATEs
+#'
 }
 \description{
 Implementation of MOM IPW using the \code{\link{grf}} package

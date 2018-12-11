@@ -25,6 +25,7 @@ cf_dml1(est, y, d, x, np, xnew, index, args_tau = list())
 }
 \value{
 Returns n x 4 matrix containing the nuisance parameters
+#'
 }
 \description{
 This function implements the 50:50 cross-fitting

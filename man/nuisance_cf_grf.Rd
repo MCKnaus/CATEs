@@ -27,6 +27,7 @@ nuisance_cf_grf(y, d, x, index, args_p = list(), args_y = list(),
 }
 \value{
 Returns n x 4 matrix containing the nuisance parameters
+#'
 }
 \description{
 This function creates the nuisance parameters p(x), mu(x), and mu_d(x)

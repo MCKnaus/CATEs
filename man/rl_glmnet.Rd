@@ -21,6 +21,7 @@ rl_glmnet(y, d, x, np, xnew, args_tau = list())
 }
 \value{
 Returns vector containing the out-of-sample IATEs
+#'
 }
 \description{
 Implementation of R-learning using the \code{\link{glmnet}} package

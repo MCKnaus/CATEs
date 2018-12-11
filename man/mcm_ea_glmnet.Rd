@@ -21,6 +21,7 @@ mcm_ea_glmnet(y, d, x, np, xnew, args_tau = list())
 }
 \value{
 Returns vector containing the out-of-sample IATEs
+#'
 }
 \description{
 Implementation of MCM with efficiency augmentation using the \code{\link{glmnet}} package

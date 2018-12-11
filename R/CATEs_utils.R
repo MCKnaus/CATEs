@@ -12,6 +12,8 @@
 #' @import glmnet
 #'
 #' @return Returns n x 4 matrix containing the nuisance parameters
+#'
+#' @export
 
 nuisance_cf_glmnet <- function(y,d,x,index,
                                args_p=list(),
@@ -68,6 +70,8 @@ nuisance_cf_glmnet <- function(y,d,x,index,
 #' @import grf
 #'
 #' @return Returns n x 4 matrix containing the nuisance parameters
+#'
+#' @export
 
 
 nuisance_cf_grf <- function(y,d,x,index,
@@ -122,6 +126,8 @@ nuisance_cf_grf <- function(y,d,x,index,
 #' @import glmnet
 #'
 #' @return Returns vector containing the out-of-sample IATEs
+#'
+#' @export
 
 mom_ipw_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   mo = y * (d-np[,"p_hat"]) / (np[,"p_hat"]*(1-np[,"p_hat"]))
@@ -142,6 +148,8 @@ mom_ipw_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
 #' @import glmnet
 #'
 #' @return Returns vector containing the out-of-sample IATEs
+#'
+#' @export
 
 mom_dr_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   mo = np[,"y1_hat"] - np[,"y0_hat"] + d * (y-np[,"y1_hat"]) / np[,"p_hat"] - (1-d) * (y-np[,"y0_hat"]) / (1-np[,"p_hat"])
@@ -162,6 +170,8 @@ mom_dr_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
 #' @import glmnet
 #'
 #' @return Returns vector containing the out-of-sample IATEs
+#'
+#' @export
 
 mcm_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   mo = 2 * y * (2*d - 1)
@@ -182,6 +192,8 @@ mcm_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
 #' @import glmnet
 #'
 #' @return Returns vector containing the out-of-sample IATEs
+#'
+#' @export
 
 mcm_ea_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   mo = 2 * (y - np[,"y_hat"]) * (2*d - 1)
@@ -203,6 +215,8 @@ mcm_ea_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
 #' @import glmnet
 #'
 #' @return Returns vector containing the out-of-sample IATEs
+#'
+#' @export
 
 rl_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   mo = (y - np[,"y_hat"]) / (d - np[,"p_hat"])
@@ -224,6 +238,8 @@ rl_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
 #' @import grf
 #'
 #' @return Returns vector containing the out-of-sample IATEs
+#'
+#' @export
 
 mom_ipw_grf = function(y,d,x,np,xnew,args_tau=list()) {
   mo = y * (d-np[,"p_hat"]) / (np[,"p_hat"]*(1-np[,"p_hat"]))
@@ -244,6 +260,8 @@ mom_ipw_grf = function(y,d,x,np,xnew,args_tau=list()) {
 #' @import grf
 #'
 #' @return Returns vector containing the out-of-sample IATEs
+#'
+#' @export
 
 mom_dr_grf = function(y,d,x,np,xnew,args_tau=list()) {
   mo = np[,"y1_hat"] - np[,"y0_hat"] + d * (y-np[,"y1_hat"]) / np[,"p_hat"] - (1-d) * (y-np[,"y0_hat"]) / (1-np[,"p_hat"])
@@ -265,6 +283,8 @@ mom_dr_grf = function(y,d,x,np,xnew,args_tau=list()) {
 #' @param args_y0 List of arguments passed to estimate outcome model of non-treated
 #'
 #' @return Returns n x 4 matrix containing the nuisance parameters
+#' 
+#' @export
 
 cf_dml1 = function(est,y,d,x,np,xnew,index,args_tau=list()) {
 

@@ -21,6 +21,7 @@ mom_dr_grf(y, d, x, np, xnew, args_tau = list())
 }
 \value{
 Returns vector containing the out-of-sample IATEs
+#'
 }
 \description{
 Implementation of MOM DR using the \code{\link{grf}} package

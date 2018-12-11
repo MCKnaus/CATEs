@@ -1,10 +1,8 @@
 # CATEs
-Implementation of all estimators used in the Empirical Monte Carlo Study of Knaus, Lechner and Strittmatter (2018). 
-The cross-validated Post-Lasso is based on the [grf](https://github.com/grf-labs/grf) and [glmnet](https://github.com/cran/glmnet) packages.
+Implementation of all estimators that are applied in the Empirical Monte Carlo Study of Knaus, Lechner and Strittmatter (2018). They are based on the packages [grf](https://github.com/grf-labs/grf) and [glmnet](https://github.com/cran/glmnet).
 
 ## Example
-
-As we are not allowed to share the data underlying our study, the following example uses the observational data generating process of the example of [grf](https://github.com/grf-labs/grf) to illustrate how it works.
+As we are not allowed to share the data used in the study, the following example uses the observational data generating process of the example of [grf](https://github.com/grf-labs/grf) to illustrate how it works. The function IATEs is a wrapper for the underlying functions and uses all the default settings of the packages. If you want to have more control over the settings, use the respective functions in CATEs_utils.
 
 ```R
 # Download current version from Github
