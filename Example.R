@@ -3,7 +3,7 @@ library(devtools)
 install_github(repo="MCKnaus/CATEs")
 library(CATEs)
 
-# Generate estimation sample
+# Generate training sample
 n = 4000; p = 20
 x_tr = matrix(rnorm(n * p), n, p)
 tau_tr = 1 / (1 + exp(-x_tr[, 3]))
