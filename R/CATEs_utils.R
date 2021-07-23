@@ -87,25 +87,25 @@ nuisance_cf_grf <- function(y,d,x,index,
 
     fit_p = do.call(regression_forest,c(list(X=x[-index[[i]],,drop=F],
                                              Y=d[-index[[i]]]),
-                                        tune.parameters = TRUE,
+                                        tune.parameters = "all",
                                         args_p))
     np[index[[i]],1] = predict(fit_p,x[index[[i]],,drop=F])$prediction
 
     fit_y = do.call(regression_forest,c(list(X=x[-index[[i]],,drop=F],
                                              Y=y[-index[[i]]]),
-                                        tune.parameters = TRUE,
+                                        tune.parameters = "all",
                                         args_y))
     np[index[[i]],2] = predict(fit_y,x[index[[i]],,drop=F])$prediction
 
     fit_y0 = do.call(regression_forest,c(list(X=x[-index[[i]],,drop=F][d[-index[[i]]] == 0,,drop=F],
                                               Y=y[-index[[i]]][d[-index[[i]]] == 0]),
-                                         tune.parameters = TRUE,
+                                         tune.parameters = "all",
                                          args_y0))
     np[index[[i]],3] = predict(fit_y0,x[index[[i]],,drop=F])$prediction
 
     fit_y1 = do.call(regression_forest,c(list(X=x[-index[[i]],,drop=F][d[-index[[i]]] == 1,,drop=F],
                                               Y=y[-index[[i]]][d[-index[[i]]] == 1]),
-                                         tune.parameters = TRUE,
+                                         tune.parameters = "all",
                                          args_y1))
     np[index[[i]],4] = predict(fit_y1,x[index[[i]],,drop=F])$prediction
     # Think about predicting also for the other treatment category in the other fold and take the average
@@ -243,7 +243,7 @@ rl_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
 
 mom_ipw_grf = function(y,d,x,np,xnew,args_tau=list()) {
   mo = y * (d-np[,"p_hat"]) / (np[,"p_hat"]*(1-np[,"p_hat"]))
-  fit_tau = do.call(regression_forest,c(list(X=x,Y=mo),tune.parameters = TRUE,args_tau))
+  fit_tau = do.call(regression_forest,c(list(X=x,Y=mo),tune.parameters = "all",args_tau))
   iate = predict(fit_tau,xnew)$prediction
   return(iate)
 }
@@ -265,7 +265,7 @@ mom_ipw_grf = function(y,d,x,np,xnew,args_tau=list()) {
 
 mom_dr_grf = function(y,d,x,np,xnew,args_tau=list()) {
   mo = np[,"y1_hat"] - np[,"y0_hat"] + d * (y-np[,"y1_hat"]) / np[,"p_hat"] - (1-d) * (y-np[,"y0_hat"]) / (1-np[,"p_hat"])
-  fit_tau = do.call(regression_forest,c(list(X=x,Y=mo),tune.parameters = TRUE,args_tau))
+  fit_tau = do.call(regression_forest,c(list(X=x,Y=mo),tune.parameters = "all",args_tau))
   iate = predict(fit_tau,xnew)$prediction
   return(iate)
 }
@@ -283,7 +283,7 @@ mom_dr_grf = function(y,d,x,np,xnew,args_tau=list()) {
 #' @param args_y0 List of arguments passed to estimate outcome model of non-treated
 #'
 #' @return Returns n x 4 matrix containing the nuisance parameters
-#' 
+#'
 #' @export
 
 cf_dml1 = function(est,y,d,x,np,xnew,index,args_tau=list()) {
@@ -301,4 +301,3 @@ cf_dml1 = function(est,y,d,x,np,xnew,index,args_tau=list()) {
   }
   return(iate)
 }
-
