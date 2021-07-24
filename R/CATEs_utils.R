@@ -1,3 +1,4 @@
+# %%
 #' This function creates the nuisance parameters p(x), mu(x), and mu_d(x)
 #' via cross-fitting using the \code{\link{glmnet}} package
 #'
@@ -20,17 +21,16 @@ nuisance_cf_glmnet <- function(y,d,x,index,
                                args_y=list(),
                                args_y0=list(),
                                args_y1=list()) {
-
-
   np = matrix(NA,length(d),4)
   colnames(np) = c("p_hat","y_hat","y0_hat","y1_hat")
 
   for(i in 1:length(index)) {
-    # P-score
+    # P-score - fit leaving out index i
     fit_p = do.call(cv.glmnet,c(list(x=x[-index[[i]],,drop=F],
                                      y=d[-index[[i]]],
                                      family="binomial"),
                                 args_p))
+    # predict on i
     np[index[[i]],1] = predict(fit_p,x[index[[i]],,drop=F], s = "lambda.min", type = "response")
 
     # Outcome
@@ -55,6 +55,7 @@ nuisance_cf_glmnet <- function(y,d,x,index,
 }
 
 
+# %%
 
 #' This function creates the nuisance parameters p(x), mu(x), and mu_d(x)
 #' via cross-fitting using the \code{\link{grf}} package
@@ -114,6 +115,7 @@ nuisance_cf_grf <- function(y,d,x,index,
   return(np)
 }
 
+# %%
 
 #' Implementation of MOM IPW using the \code{\link{glmnet}} package
 #'
@@ -136,6 +138,7 @@ mom_ipw_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   return(iate)
 }
 
+# %%
 
 #' Implementation of MOM DR using the \code{\link{glmnet}} package
 #'
@@ -158,6 +161,7 @@ mom_dr_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   return(iate)
 }
 
+# %%
 
 #' Implementation of MCM using the \code{\link{glmnet}} package
 #'
@@ -181,6 +185,8 @@ mcm_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   return(iate)
 }
 
+# %%
+
 #' Implementation of MCM with efficiency augmentation using the \code{\link{glmnet}} package
 #'
 #' @param y Vector of outcome values
@@ -203,6 +209,7 @@ mcm_ea_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   return(iate)
 }
 
+# %%
 
 #' Implementation of R-learning using the \code{\link{glmnet}} package
 #'
@@ -226,6 +233,7 @@ rl_glmnet = function(y,d,x,np,xnew,args_tau=list()) {
   return(iate)
 }
 
+# %%
 
 #' Implementation of MOM IPW using the \code{\link{grf}} package
 #'
@@ -248,6 +256,7 @@ mom_ipw_grf = function(y,d,x,np,xnew,args_tau=list()) {
   return(iate)
 }
 
+# %%
 
 #' Implementation of MOM DR using the \code{\link{grf}} package
 #'
@@ -270,6 +279,7 @@ mom_dr_grf = function(y,d,x,np,xnew,args_tau=list()) {
   return(iate)
 }
 
+# %%
 
 #' This function implements the 50:50 cross-fitting
 #'
@@ -286,13 +296,13 @@ mom_dr_grf = function(y,d,x,np,xnew,args_tau=list()) {
 #'
 #' @export
 
-cf_dml1 = function(est,y,d,x,np,xnew,index,args_tau=list()) {
+cf_dml1 = function(est, y, d, x, np, xnew, index, args_tau=list()) {
 
-  iate = matrix(0,length(d),1)
+  iate = matrix(0, length(d), 1)
 
   for (i in 1:length(index)) {
     iate = iate + 1/length(index) *
-                  do.call(est,list(y[index[[i]]],
+                  do.call(est,  list(y[index[[i]]],
                           d[index[[i]]],
                           x[index[[i]],,drop=F],
                           np[index[[i]],],
@@ -301,3 +311,5 @@ cf_dml1 = function(est,y,d,x,np,xnew,index,args_tau=list()) {
   }
   return(iate)
 }
+
+# %%
