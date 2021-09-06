@@ -33,5 +33,5 @@ mMSE*1000
 
 ## References
 
-Knaus, Lechner, Strittmatter (2020). Machine Learning Estimation of Heterogeneous Causal
-Effects: Empirical Monte Carlo Evidence, [Journal of Human Resources](http://jhr.uwpress.org/content/early/2020/03/24/jhr.57.2.0718-9615R1.abstract) [arXiv](https://arxiv.org/abs/1810.13237)
+Knaus, Lechner, Strittmatter (2021). Machine Learning Estimation of Heterogeneous Causal
+Effects: Empirical Monte Carlo Evidence, [*The Econometrics Journal*](https://academic.oup.com/ectj/article/24/1/134/5854188?guestAccessKey=712f5753-3a71-4b36-b1b6-45ef7fed36fc), [arXiv](https://arxiv.org/abs/1810.13237)
